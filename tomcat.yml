@@ -1,6 +1,6 @@
 ---
 - hosts: centos
-  become:yes
+  become: yes
   tasks:
     - name: install jdk & Tomcat
       yum:
@@ -14,7 +14,7 @@
         - tomcat-admin-webapps
   
     - name: copy tomcat-user.xml
-      template:
+      copy:
         src: tomcat-users.xml
         dest: /usr/share/tomcat/conf/tomcat-user.xml
 
