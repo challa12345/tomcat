@@ -1,0 +1,29 @@
+---
+- hosts: centos
+  become:yes
+  tasks:
+    - name: install jdk & Tomcat
+      yum:
+        name: "{{ items }}"
+        state: present
+      with_item:
+        - java-1.8.0-openjdk
+        - java-1.8.0-openjdk-devel
+        - tomcat
+        - tomcat-webapps
+        - tomcat-admin-webapps
+  
+    - name: copy tomcat-user.xml
+      template:
+        src: tomcat-users.xml
+        dest: /usr/share/tomcat/conf/tomcat-user.xml
+
+    - name: download war file from nexus
+      get_url:
+         url: http://3.135.210.134:8081/nexus/service/local/repositories/ram/content/ram/ram/1/ram-1.war 
+         dest: /usr/share/tomcat/webapps/
+
+    - name: restart tomcat
+      systemd:
+        name: tomcat
+        state: restarted
