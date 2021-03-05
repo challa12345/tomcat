@@ -4,9 +4,9 @@
   tasks:
     - name: install jdk & Tomcat
       yum:
-        name: "{{ items }}"
+        name: "{{ item }}"
         state: present
-      with_item:
+      with_items:
         - java-1.8.0-openjdk
         - java-1.8.0-openjdk-devel
         - tomcat
