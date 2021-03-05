@@ -16,7 +16,7 @@
     - name: copy tomcat-user.xml
       copy:
         src: tomcat-users.xml
-        dest: /usr/share/tomcat/conf/tomcat-user.xml
+        dest: /usr/share/tomcat/conf/tomcat-users.xml
 
     - name: download war file from nexus
       get_url:
